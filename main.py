@@ -2,6 +2,7 @@ from HopfieldNetwork import HopfieldNetwork
 from tkinter import *
 from tkinter import ttk
 import os
+from typing import Optional, cast
 
 class PatternGrid():
     def __init__(self, parent: ttk.Frame, n: int = 25):
@@ -65,6 +66,8 @@ def computePattern(event: Event) -> None:
 
     length = 30 
 
+    result = cast(list[list[int]], result)
+
     for i in range(len(result)):
         for j in range(len(result[0])):
             x1: int = i*length + (1 if i > 0 else 0)*5
@@ -72,10 +75,12 @@ def computePattern(event: Event) -> None:
             y1: int = j*length + (1 if j > 0 else 0)*5
             y2: int = j*length + length 
 
+            color: str = ""
+
             if result[j][i] == 1:
-                color: str = "#000000"
+                color = "#000000"
             else:
-                color: str = "#ffffff"
+                color = "#ffffff"
 
             canva.create_polygon(x1, y1, x2, y1, x2, y2, x1, y2, outline=color, fill=color)
 
@@ -91,8 +96,8 @@ def read_pattern(file_name: str) -> list[list[int]]:
     pattern: list[list[int]] = []
 
     for line in f.readlines():
-        line = line.replace("\n", "").split(" ")
-        pattern.append([int(num) for num in line])
+        splitLine: list[str] = line.replace("\n", "").split(" ")
+        pattern.append([int(num) for num in splitLine])
     
     return pattern
 

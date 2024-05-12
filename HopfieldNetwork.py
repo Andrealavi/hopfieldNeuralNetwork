@@ -1,6 +1,8 @@
+from typing import Optional
+
 class HopfieldNetwork:
-    def __init__(self):
-        self.patterns: list[list[int]] = []
+    def __init__(self) -> None:
+        self.patterns: list[list[list[int]]] = []
         self.weigths: list[list[float]] = []
 
     def add_pattern(self, pattern: list[list[int]]) -> None:
@@ -17,7 +19,7 @@ class HopfieldNetwork:
                 if (i == j):
                     row_weigths.append(0.0)
                 else:
-                    sum = 0
+                    sum: float = 0.0
 
                     for k in range(len(self.patterns)):
                         sum += self.patterns[k][i // len(self.patterns[0][0])][i % len(self.patterns[0][0])] * self.patterns[k][j // len(self.patterns[0][0])][j % len(self.patterns[0][0])]
@@ -37,7 +39,7 @@ class HopfieldNetwork:
                 print(self.weigths[i][j], sep=' ', end=' ')
             print()
 
-    def checkMatch(self, classification) -> list[list[int]]:
+    def checkMatch(self, classification) -> Optional[list[list[int]]]:
         for pattern in self.patterns:
             isEqual: bool = True
             for i in range(len(pattern)):
@@ -50,7 +52,7 @@ class HopfieldNetwork:
 
         return None
 
-    def classify(self, img: list[list[int]]) -> list[list[int]]:
+    def classify(self, img: list[list[int]]) -> Optional[list[list[int]]]:
         prev: list[list[int]] = img
         curr: list[list[int]] = []
 
@@ -59,7 +61,7 @@ class HopfieldNetwork:
                 row_curr: list[int] = []
 
                 for j in range(len(prev[0])):
-                    sum = 0
+                    sum: float = 0.0
 
                     for l in range(len(self.weigths[0])):
                         sum += self.weigths[(i * len(prev[0])) + (j % len(prev[0]))][l] * prev[l // len(self.patterns[0])][l % len(self.patterns[0][0])]
