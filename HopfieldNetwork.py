@@ -1,17 +1,17 @@
 class HopfieldNetwork:
     def __init__(self):
-        self.patterns = []
-        self.weigths = []
+        self.patterns: list[list[int]] = []
+        self.weigths: list[list[float]] = []
 
     def add_pattern(self, pattern: list[list[int]]) -> None:
         self.patterns.append(pattern)
 
-    def train(self):
+    def train(self) -> None:
         self.weigths = []
-        n = len(self.patterns[0][0])*len(self.patterns[0][0])
+        n: int = len(self.patterns[0][0])*len(self.patterns[0][0])
 
         for i in range(n):
-            row_weigths = []
+            row_weigths: list[float] = []
 
             for j in range(n):
                 if (i == j):
@@ -28,16 +28,16 @@ class HopfieldNetwork:
 
             self.weigths.append(row_weigths)
 
-    def get_weights(self):
+    def get_weights(self) -> list[list[float]]:
         return self.weigths
     
-    def print_weights(self):
+    def print_weights(self) -> None:
         for i in range(len(self.weigths)):
             for j in range(len(self.weigths[0])):
                 print(self.weigths[i][j], sep=' ', end=' ')
             print()
 
-    def checkMatch(self, classification):
+    def checkMatch(self, classification) -> list[list[int]]:
         for pattern in self.patterns:
             isEqual: bool = True
             for i in range(len(pattern)):
@@ -50,13 +50,13 @@ class HopfieldNetwork:
 
         return None
 
-    def classify(self, img) -> list[list[int]]:
-        prev = img
-        curr = []
+    def classify(self, img: list[list[int]]) -> list[list[int]]:
+        prev: list[list[int]] = img
+        curr: list[list[int]] = []
 
         for k in range(100):
             for i in range(len(prev)):
-                row_curr = []
+                row_curr: list[int] = []
 
                 for j in range(len(prev[0])):
                     sum = 0

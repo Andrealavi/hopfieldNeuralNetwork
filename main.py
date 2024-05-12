@@ -47,7 +47,7 @@ class PatternGrid():
             for j in range(self.n):
                 self.buttons[i][j]['bg'] = 'white'
 
-def computePattern(event: Event):
+def computePattern(event: Event) -> None:
     matrixValues: list[list[int]] = pattern.getMatrixValues()
 
     rowSum = 0
@@ -67,22 +67,22 @@ def computePattern(event: Event):
 
     for i in range(len(result)):
         for j in range(len(result[0])):
-            x1 = i*length + (1 if i > 0 else 0)*5
-            x2 = i*length + length
-            y1 = j*length + (1 if j > 0 else 0)*5
-            y2 = j*length + length 
+            x1: int = i*length + (1 if i > 0 else 0)*5
+            x2: int = i*length + length
+            y1: int = j*length + (1 if j > 0 else 0)*5
+            y2: int = j*length + length 
 
             if result[j][i] == 1:
-                color = "#000000"
+                color: str = "#000000"
             else:
-                color = "#ffffff"
+                color: str = "#ffffff"
 
             canva.create_polygon(x1, y1, x2, y1, x2, y2, x1, y2, outline=color, fill=color)
 
     pattern.cleanPattern()
 
 
-def cleanGrid(event: Event):
+def cleanGrid(event: Event) -> None:
     pattern.cleanPattern()
 
 def read_pattern(file_name: str) -> list[list[int]]:
@@ -96,7 +96,7 @@ def read_pattern(file_name: str) -> list[list[int]]:
     
     return pattern
 
-def addPattern(event: Event):
+def addPattern(event: Event) -> None:
     matrixValues: list[list[int]] = pattern.getMatrixValues()
 
     net.add_pattern(matrixValues)
