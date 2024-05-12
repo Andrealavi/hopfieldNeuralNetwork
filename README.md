@@ -1,0 +1,1 @@
+This is a small project made in order to better understand how an Hopfield Neural Network works. It is a simple application, made using python's tkinter module, capable of recognizing patterns. By default the network is trained to recognize the numbers 1, 2 and 3, but it can be trained with other patterns.
